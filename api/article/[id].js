@@ -18,7 +18,7 @@ export default function handler(req, res) {
     const article = articles[id] || {
         title: "Article Not Found",
         description: "The requested article does not exist.",
-        image: "https://yourapp.com/default-thumbnail.jpg"
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTIjeTziSjCZpmM8JZ9GB3Er1ELEAzyTEtgW8qkNUPi4Hthpi5Yb-4b47INtfVfAfLdUY"
     };
 
     // Serve Open Graph meta tags dynamically
@@ -32,9 +32,9 @@ export default function handler(req, res) {
             <meta property="og:title" content="${article.title}" />
             <meta property="og:description" content="${article.description}" />
             <meta property="og:image" content="${article.image}" />
-            <meta property="og:url" content="https://yourapp.com/#/articles/${id}" />
+            <meta property="og:url" content="https://news-test0-123.vercel.app/#/articles/${id}" />
             <meta name="twitter:card" content="summary_large_image">
-            <meta http-equiv="refresh" content="0; url=https://yourapp.com/#/articles/${id}" />
+            <meta http-equiv="refresh" content="0; url=https://news-test0-123.vercel.app/#/articles/${id}" />
             <title>${article.title}</title>
         </head>
         <body>
