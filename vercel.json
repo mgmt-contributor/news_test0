@@ -1,5 +1,5 @@
 {
-    "version": 2,
+    "version": "rich_preview@1.0.0",
     "functions": {
       "[rich_preview].js": {
         "runtime": "nodejs18.x"
