@@ -27,8 +27,8 @@ export default function handler(req, res) {
         <meta property="og:description" content="${article.description}" />
         <meta property="og:image" content="${article.image}" />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://news-test0-123.vercel.app/#/articles/${id}" />
-        <meta http-equiv="refresh" content="0;url=https://news-test0-123.vercel.app/#/articles/${id}" />
+        <meta property="og:url" content="https://news-test0-123.vercel.app/articles/${id}" />
+        <meta http-equiv="refresh" content="0;url=https://news-test0-123.vercel.app/articles/${id}" />
       </head>
       <body></body>
       </html>
