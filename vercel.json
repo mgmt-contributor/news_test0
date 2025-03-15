@@ -1,9 +1,20 @@
 {
-    "version": 2,
-    "functions": {
-      "[rich_preview].js": {
-        "runtime": "nodejs18.x"
-      }
+  "version": 2,
+  "builds": [
+    {
+      "src": "[rich_preview].js",
+      "use": "@vercel/node"
     }
-  }
-  
+  ],
+  "functions": {
+    "[rich_preview].js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/[rich_preview].js"
+    }
+  ]
+}
