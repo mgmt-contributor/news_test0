@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "functions": {
+      "[rich_preview].js": {
+        "runtime": "nodejs18.x"
+      }
+    }
+  }
+  
