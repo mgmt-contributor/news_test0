@@ -97,7 +97,7 @@ export default async function handler(req, res) {
           <meta property="og:description" content="${result.articleContent}" />
           <meta property="og:image" content="${result.thumbnailImage}" />
           <meta property="og:type" content="article" />
-          <meta property="og:url" content="${websiteUrl}/articles/${id}" />
+          <meta property="og:url" content="${websiteUrl}/#/articles/${id}" />
         </head>
         <body>
           <p>Please wait...</p>
@@ -105,8 +105,6 @@ export default async function handler(req, res) {
         </html>
       `);
     } else {
-      // For real users, redirect to the Flutter app
-      res.setHeader("Content-Type", "text/html");
       // For real users, redirect to hash-based URL
       res.send(`
         <!DOCTYPE html>
