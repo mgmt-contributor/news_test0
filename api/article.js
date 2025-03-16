@@ -17,6 +17,8 @@ const firebaseConfig = {
 
 // Website ID
 const websiteId = process.env.WEBSITE_ID;
+// Website URL
+const websiteUrl = "https://news-test0-123.vercel.app";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -65,9 +67,10 @@ async function fetchInformation(collectionName, channelLink, article_uid) {
   }
 }
 
+
 export default async function handler(req, res) {
-  const { id } = req.query; // Get the article ID from the URL
-  const websiteUrl = "https://news-test0-123.vercel.app";
+  const { id } = req.query;
+  const userAgent = req.headers['user-agent'] || '';
 
   if (!id) {
     return res.status(400).json({ error: "Article ID is required" });
@@ -80,23 +83,35 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: "Article not found" });
     }
 
-    res.setHeader("Content-Type", "text/html");
-    res.send(`
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta property="og:title" content="${result.title}" />
-        <meta property="og:description" content="${result.articleContent}" />
-        <meta property="og:image" content="${result.thumbnailImage}" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="${websiteUrl}/articles/${id}" />
-        <meta http-equiv="refresh" content="0;url=${websiteUrl}/articles/${id}" />
-      </head>
-      <body></body>
-      </html>
-    `);
+    // Check if it's a crawler or social media bot
+    const isCrawler = /bot|crawl|facebook|twitter|linkedin|slack|whatsapp|telegram|discord/i.test(userAgent);
+
+    if (isCrawler) {
+      // For crawlers, return just the meta tags without redirect
+      res.setHeader("Content-Type", "text/html");
+      // For real users, redirect to hash-based URL
+      res.send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta http-equiv="refresh" content="0; url=/#/articles/${id}">
+        </head>
+        <body></body>
+        </html>
+      `);
+    } else {
+      // For real users, redirect to the Flutter app
+      res.setHeader("Content-Type", "text/html");
+      res.res.res.re
+      // Note: Using hash routing (#) to ensure Flutter handles it properly
+    }
   } catch (error) {
     console.error("Error in handler:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+
+
+
+
