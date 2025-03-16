@@ -89,6 +89,24 @@ export default async function handler(req, res) {
     if (isCrawler) {
       // For crawlers, return just the meta tags without redirect
       res.setHeader("Content-Type", "text/html");
+      res.send(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta property="og:title" content="${result.title}" />
+          <meta property="og:description" content="${result.articleContent}" />
+          <meta property="og:image" content="${result.thumbnailImage}" />
+          <meta property="og:type" content="article" />
+          <meta property="og:url" content="${websiteUrl}/articles/${id}" />
+        </head>
+        <body>
+          <p>Please wait...</p>
+        </body>
+        </html>
+      `);
+    } else {
+      // For real users, redirect to the Flutter app
+      res.setHeader("Content-Type", "text/html");
       // For real users, redirect to hash-based URL
       res.send(`
         <!DOCTYPE html>
@@ -99,10 +117,6 @@ export default async function handler(req, res) {
         <body></body>
         </html>
       `);
-    } else {
-      // For real users, redirect to the Flutter app
-      res.setHeader("Content-Type", "text/html");
-      res.res.res.re
       // Note: Using hash routing (#) to ensure Flutter handles it properly
     }
   } catch (error) {
